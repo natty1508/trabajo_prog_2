@@ -1,184 +1,199 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* App.css */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.hero {
+body {
+  font-family: sans-serif;
+  background: #f4f4f4;
+}
+
+/* ─── Wrapper raíz ─── */
+#root > div {
+  display: flex;
   position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+  min-height: 100vh;
+  background: #fff;
 }
 
-#center {
+/* ─── Overlay del formulario ─── */
+#root > div > div:first-child {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+/* Caja del formulario */
+#root > div > div:first-child > div {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  gap: 12px;
+  min-width: 280px;
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+#root > div > div:first-child > div > h1 {
+  font-size: 18px;
+  font-weight: 500;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
-}
-
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
-}
-
-.ticks {
-  position: relative;
+#root > div > div:first-child > div > select,
+#root > div > div:first-child > div > input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  color: #222;
   width: 100%;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
-
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
 }
+
+#root > div > div:first-child > div > button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f0f0f0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#root > div > div:first-child > div > button:hover {
+  background: #e0e0e0;
+}
+
+/* ─── Sidebar ─── */
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 16px;
+  border-right: 1px solid #ddd;
+  min-width: 155px;
+  background: #fff;
+}
+
+aside > button,
+aside > select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  color: #222;
+  cursor: pointer;
+  text-align: left;
+}
+
+aside > button:hover,
+aside > select:hover {
+  background: #f5f5f5;
+}
+
+/* ─── Panel principal ─── */
+aside + div {
+  flex: 1;
+  padding: 20px;
+}
+
+aside + div > h1 {
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Grilla de listados ACAAA
+ */
+aside + div > div {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ─── Listado (columna por categoría) ─── */
+aside + div > div > div {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 14px;
+  min-width: 160px;
+  flex: 1;
+  background: #fff;
+}
+
+aside + div > div > div > h1 {
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: underline;
+  margin-bottom: 14px;
+}
+
+/* Contenedor de tarjetas dentro del listado  ACAAAAAAAA*/
+aside + div > div > div > div {
+  display: inline;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ─── Tarjeta ACAAAAA ─── */
+aside + div > div > div > div > div {
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+aside + div > div > div > div > div > p {
+  font-size: 14px;
+  flex: 1;
+}
+
+aside + div > div > div > div > div > p::before {
+  content: "• ";
+  color: #888;
+}
+
+aside + div > div > div > div > div > button {
+  font-size: 11px;
+  padding: 2px 7px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: transparent;
+  color: #aaa;
+  cursor: pointer;
+}
+
+aside + div > div > div > div > div > button:hover {
+  background: #f5f5f5;
+  color: #e55;
+}
+
+aside + div > div > div > div > div > select {
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #444;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* la tarjeta necesita width fijo y su contenedor no debe ser display: flex y el contenedor de las listas debe tener width 100% y debe alinear sus hijos*/
+

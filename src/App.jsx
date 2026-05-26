@@ -1,122 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react"
+import Listado from "./componentes/Listado"
+import Formulario from "./componentes/Formulario"
+import "./App.css"
 
-function App() {
-  const [count, setCount] = useState(0)
+const tareasDefault = [
+    { id: 1, descripcion: "Pasear al perro",      categoria: 0,  prioridad: 0,  estado: "Pendiente" },
+    { id: 2, descripcion: "Asistente de chef",    categoria: 1,  prioridad: 1, estado: "Finalizado" },
+    { id: 3, descripcion: "Funciones cuadráticas",categoria: 2,  prioridad: 0,  estado: "Proceso" },
+]
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+export default function App (){
+    const [tareas, setTareas] = useState(tareasDefault)
+    const [formAbierto, setForm] = useState(false)
+
+    const abrirFormulario = (e) => {
+        if (e.target === e.currentTarget) {
+            setForm(!formAbierto)
+        }
+    }
+
+    const [catFiltro, setCatFiltro] = useState(-1)
+    const [prioFiltro, setPrioFiltro] = useState(-1)
+
+    const listas = [0,1,2];
+
+    const guardar = (tareaNueva) => {
+        const tareasNuevas = [...tareas]
+        tareasNuevas.push(tareaNueva)
+        setTareas((tareasNuevas))
+    }
+
+    const eliminar = (tarea_id) =>{
+    const tareaNueva = tareas.filter((tarea) => tarea.id != tarea_id)
+    setTareas(tareaNueva);
+    }
+
+    return(
+
+    <div>
+        {formAbierto && (<Formulario guardar={guardar} cerrarFormulario={abrirFormulario}/>)}
+        <aside>
+            <button onClick={abrirFormulario}>Tareas + </button>
+                <select onChange={e =>{setCatFiltro(parseInt(e.target.value))}}>
+                    <option value="-1">Categoria</option>
+                    <option value="2">Escuela</option>
+                    <option value="1">Trabajo</option>
+                    <option value="0">Del dia</option>
+                </select>
+                <select onChange={e => {setPrioFiltro(parseInt(e.target.value))}}> 
+                    <option value="-1">Prioridad</option>
+                    <option value="0">Alta</option>
+                    <option value="1">Media</option>
+                    <option value="2">Baja</option>
+                </select>
+        </aside>
+
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+            <h1>Tareas</h1>
+            <div>
+            {listas.filter((lista) => {return (lista == catFiltro || catFiltro == -1)}).map((lista, index) => (
+                <Listado key={index} eliminar={(tarea_id) => eliminar(tarea_id)} tareas={tareas.filter((tarea) => {return tarea.categoria == lista && (prioFiltro == -1 || prioFiltro == tarea.prioridad)})} Listadoid={lista} />
+            ))}
+            </div>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    </div>
+    )
 }
-
-export default App
