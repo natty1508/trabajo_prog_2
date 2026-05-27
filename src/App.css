@@ -195,5 +195,14 @@ aside + div > div > div > div > div > select {
   width: 100%;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+}
 /* la tarjeta necesita width fijo y su contenedor no debe ser display: flex y el contenedor de las listas debe tener width 100% y debe alinear sus hijos*/
 
