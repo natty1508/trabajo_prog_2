@@ -10,6 +10,7 @@ const tareasDefault = [
 ]
 
 export default function App() {
+    
     const [tareas, setTareas] = useState(tareasDefault)
     const [catFiltro, setCatFiltro] = useState(-1)
     const [prioFiltro, setPrioFiltro] = useState(-1)
