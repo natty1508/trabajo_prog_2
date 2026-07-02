@@ -1,3 +1,4 @@
+import { Link } from "wouter"
 export default function Header
 () {
     return (
@@ -8,7 +9,5 @@ export default function Header
         </header>
     )
 }
-<Footer>
-    hola
-</Footer>
+
 

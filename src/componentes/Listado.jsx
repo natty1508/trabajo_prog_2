@@ -1,5 +1,4 @@
 import Tarjeta from "./Tarjeta"
-import axios from 'axios'
 
 
 export default function Listado({ tareas, Listadoid, eliminar, cambiarEstado }) {
@@ -16,7 +15,6 @@ export default function Listado({ tareas, Listadoid, eliminar, cambiarEstado }) 
             <div>
                 {tareas
                     .filter((tarea) => tarea.categoria == Listadoid)
-                    .toSorted((a, b) => a.prioridad - b.prioridad)
                     .map((tarjeta) => (
                         <Tarjeta
                             key={tarjeta.id}
