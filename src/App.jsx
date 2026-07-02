@@ -4,6 +4,7 @@ import axios from 'axios'
 import Listado from "./componentes/Listado"
 import Formulario from "./componentes/Formulario"
 import Header from "./componentes/Header"
+import Footer from "./componentes/footer"
 import "./App.css"
 
 const tareasDefault = [
@@ -34,6 +35,7 @@ export default function App() {
         )
         setTareas(nuevasTareas)
     }
+
 
     return (
                 <Router>
@@ -77,6 +79,7 @@ export default function App() {
                         <h1>Pagina no encontrada</h1>
                     </Route>
                 </Switch>
+                <Footer></Footer>
             </Router>
 
     )
