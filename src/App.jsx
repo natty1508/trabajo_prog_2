@@ -1,15 +1,19 @@
 import { useState } from "react"
+import { Router, Route, Switch } from 'wouter'
+import axios from 'axios'
 import Listado from "./componentes/Listado"
 import Formulario from "./componentes/Formulario"
+import Header from "./componentes/Header"
 import "./App.css"
 
 const tareasDefault = [
-    { id: 1, descripcion: "Pasear al perro",       categoria: 0, prioridad: 0, estado: "Pendiente" },
-    { id: 2, descripcion: "Asistente de chef",     categoria: 1, prioridad: 1, estado: "Finalizado" },
+    { id: 1, descripcion: "Pasear al perro", categoria: 0, prioridad: 0, estado: "Pendiente" },
+    { id: 2, descripcion: "Asistente de chef", categoria: 1, prioridad: 1, estado: "Finalizado" },
     { id: 3, descripcion: "Funciones cuadráticas", categoria: 2, prioridad: 0, estado: "Proceso" },
 ]
 
 export default function App() {
+
     const [tareas, setTareas] = useState(tareasDefault)
     const [catFiltro, setCatFiltro] = useState(-1)
     const [prioFiltro, setPrioFiltro] = useState(-1)
@@ -32,8 +36,14 @@ export default function App() {
     }
 
     return (
-        <div>
-            <aside>
+                <Router>
+            <Header />
+                <Switch>
+                    <Route path="/nueva">
+                        <Formulario />
+                    </Route>
+                    <Route path="/listado">
+                        <aside>
                 <select onChange={e => setCatFiltro(parseInt(e.target.value))}>
                     <option value="-1">Categoria</option>
                     <option value="2">Escuela</option>
@@ -47,22 +57,28 @@ export default function App() {
                     <option value="2">Baja</option>
                 </select>
             </aside>
-
-            <div style={{ display: "flex", flexDirection: "row", alignItems: "flex-start", gap: "50px" }}>
-                {listas
-                    .filter((lista) => lista == catFiltro || catFiltro == -1)
-                    .map((lista, index) => (
                         <Listado
-                            key={index}
-                            eliminar={(tarea_id) => eliminar(tarea_id)}
-                            cambiarEstado={cambiarEstado}
-                            tareas={tareas.filter((tarea) => tarea.categoria == lista && (prioFiltro == -1 || prioFiltro == tarea.prioridad))}
-                            Listadoid={lista}
+                        catFiltro={catFiltro}
+                        Listadoid={0}
                         />
-                    ))}
+                        <Listado
+                        catFiltro={catFiltro}
+                        Listadoid={1}
+                        />
+                        <Listado
+                        catFiltro={catFiltro}
+                        Listadoid={2}
+                        />
+                    </Route>
+                    <Route path="/">
+                        <h1>Componente APP</h1>
+                    </Route>
+                    <Route>
+                        <h1>Pagina no encontrada</h1>
+                    </Route>
+                </Switch>
+            </Router>
 
-                <Formulario guardar={guardar} />
-            </div>
-        </div>
     )
 }
+

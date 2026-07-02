@@ -1,4 +1,6 @@
 import Tarjeta from "./Tarjeta"
+import axios from 'axios'
+
 
 export default function Listado({ tareas, Listadoid, eliminar, cambiarEstado }) {
     let titulo = ""
