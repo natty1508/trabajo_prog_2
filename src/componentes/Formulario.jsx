@@ -1,16 +1,14 @@
 import useTarea from "../hooks/useTarea"
-
 export default function Formulario({ guardar }) {
     const [tarea, setDatoTarea] = useTarea()
 
     const handlerSubmit = (e) => {
         e.preventDefault()
-        const id = (new Date()).getTime()
-        guardar({ ...tarea, id })
+        guardar(tarea)
     }
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", minWidth: "200px" }}>
+        <div style={{ display: "flex", flexDirection: "column", minWidth: "200px", }}>
             <h1>Nueva Tarea</h1>
             <select onChange={e => setDatoTarea('categoria', parseInt(e.target.value))} value={tarea.categoria}>
                 <option value="0">Del dia</option>
@@ -20,8 +18,7 @@ export default function Formulario({ guardar }) {
             <input
                 type="text"
                 placeholder="descripcion..."
-                onChange={e => setDatoTarea('descripcion', e.target.value)}
-                value={tarea.descripcion}
+                onChange={e => setDatoTarea('nombre', e.target.value)}
             />
             <select onChange={e => setDatoTarea('prioridad', parseInt(e.target.value))} value={tarea.prioridad}>
                 <option value="0">Alta</option>

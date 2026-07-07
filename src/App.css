@@ -1,229 +1,226 @@
+/* ─────────────────────────────────────────
+   Base
+───────────────────────────────────────── */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #2c2c2c !important;
-  color: #ddd !important;
 }
-
+ 
 body {
-  font-family: sans-serif;
-  background: #f4f4f4;
-}
-
-/* ─── Wrapper raíz ─── */
-#root > div {
-  display: flex;
-  position: relative;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #4a372a; /* fondo corcho */
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05) 0, transparent 45%),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.05) 0, transparent 45%);
+  color: #2b2118;
   min-height: 100vh;
-  background: #fff;
 }
-
-/* ─── Overlay del formulario ─── */
-#root > div > div:first-child {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+ 
+h1 { font-weight: 600; }
+ 
+/* ─────────────────────────────────────────
+   Header (Header.jsx -> <header><a/><a/><a/></header>)
+───────────────────────────────────────── */
+header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 10;
+  gap: 22px;
+  padding: 16px 28px;
+  background: #2f2319;
+  border-bottom: 3px solid #e2a63b;
 }
-
-/* Caja del formulario */
-#root > div > div:first-child > div {
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 28px 24px;
+ 
+header > a {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #cbb9a2;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+ 
+header > a:hover {
+  color: #faf6ec;
+  border-color: #e2a63b;
+}
+ 
+/* ─────────────────────────────────────────
+   Formulario (Formulario.jsx -> el único div
+   que queda PEGADO justo después de <header>,
+   por eso "header + div" y no algo más genérico)
+───────────────────────────────────────── */
+header + div {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-width: 280px;
+  gap: 14px;
+  max-width: 340px;
+  margin: 60px auto;
+  background: #faf6ec;
+  border-radius: 8px;
+  padding: 30px 26px;
+  box-shadow: 0 14px 30px rgba(43,33,24,0.35);
 }
-
-#root > div > div:first-child > div > h1 {
-  font-size: 18px;
-  font-weight: 500;
+ 
+header + div > h1 {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 6px;
 }
-
-#root > div > div:first-child > div > select,
-#root > div > div:first-child > div > input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
+ 
+header + div > select,
+header + div > input {
+  padding: 9px 12px;
+  border: 1px solid #ddd3bf;
   border-radius: 6px;
-  font-size: 14px;
   background: #fff;
-  color: #222;
-  width: 100%;
-}
-
-#root > div > div:first-child > div > button {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #f0f0f0;
+  color: #2b2118;
   font-size: 14px;
-  font-weight: 500;
+}
+ 
+header + div > button {
+  margin-top: 4px;
+  padding: 11px;
+  border: none;
+  border-radius: 6px;
+  background: #2b2118;
+  color: #faf6ec;
+  font-weight: 600;
   cursor: pointer;
 }
-
-#root > div > div:first-child > div > button:hover {
-  background: #e0e0e0;
+ 
+header + div > button:hover {
+  background: #2f2319;
 }
-
-/* ─── Sidebar ─── */
+ 
+/* ─────────────────────────────────────────
+   Paneles simples ("/" y 404): el h1 que
+   queda pegado directo después del header
+───────────────────────────────────────── */
+header + h1 {
+  display: block;
+  text-align: center;
+  color: #faf6ec;
+  padding: 80px 20px;
+  font-size: 22px;
+}
+ 
+/* ─────────────────────────────────────────
+   Listado (App.jsx /listado -> <aside/> seguido
+   de N divs "Listado", todos hermanos sueltos,
+   SIN contenedor propio. Por eso el layout en
+   fila se hace con float en vez de con flex:
+   flex necesitaría que el padre común (que
+   también contiene el header y el footer) sea
+   flex, y eso rompería el resto de la página)
+───────────────────────────────────────── */
 aside {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 20px 16px;
-  border-right: 1px solid #ddd;
-  width: 20vw;
-  background: #fff;
+  float: left;
+  width: 200px;
+  padding: 24px 18px;
+  background: #2f2319;
 }
-
-aside > button,
+ 
 aside > select {
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #ccc;
+  padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 6px;
-  font-size: 14px;
-  background: #fff;
-  color: #222;
+  background: #faf6ec;
+  color: #2b2118;
   cursor: pointer;
-  text-align: left;
 }
-
-button, select, input {
-  padding: 3px 3px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  background: #fff;
-  color: #222;
-  cursor: pointer;
-  text-align: left;
-  display: inline-block;
+ 
+/* "~" = TODOS los hermanos div que vengan
+   después de aside (antes era "+", que solo
+   agarraba al primero) */
+aside ~ div {
+  float: left;
+  width: 240px;
+  margin: 0 16px 16px 0;
+  background: #faf6ec;
+  border-radius: 8px;
+  padding: 0 16px 16px;
+  box-shadow: 0 10px 24px rgba(43,33,24,0.3);
 }
-
-aside > button:hover,
-aside > select:hover {
-  background: #f5f5f5;
-}
-
-/* ─── Panel principal ─── */
-aside + div {
-  width: 80vw;
-  gap: 0 !important;
-}
-
-aside + div > h1 {
-  font-size: 22px;
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Grilla de listados ACAAA
- */
-aside + div > div {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
-  width: 20vw;
-  padding: 20px;
-}
-
-aside + div > :last-child {
-  border-left: 1px solid #ddd;
-  height: 100vh;
-  justify-content: start !important;
-}
-
-aside + div > :last-child >  {
-  vertical-align: top;
-}
-
-/* ─── Listado (columna por categoría) ─── */
-aside + div > div > div {
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 14px;
-  min-width: 160px;
-  flex: 1;
-  background: #fff;
-}
-
-aside + div > div > div > h1 {
+ 
+aside ~ div > h1 {
   font-size: 15px;
-  font-weight: 500;
-  text-decoration: underline;
-  margin-bottom: 14px;
+  padding: 14px 2px;
+  margin-bottom: 12px;
+  border-bottom: 3px solid #8a7a68;
 }
-
-/* Contenedor de tarjetas dentro del listado  ACAAAAAAAA*/
-aside + div > div > div > div {
-  display: inline;
+ 
+/* contenedor de tarjetas dentro de cada listado */
+aside ~ div > div {
+  display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
-/* ─── Tarjeta ACAAAAA ─── */
-aside + div > div > div > div > div {
-  width: 100%;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-aside + div > div > div > div > div > p {
-  font-size: 14px;
-  flex: 1;
-}
-
-aside + div > div > div > div > div > p::before {
-  content: "• ";
-  color: #888;
-}
-
-aside + div > div > div > div > div > button {
-  font-size: 11px;
-  padding: 2px 7px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: transparent;
-  color: #aaa;
-  cursor: pointer;
-}
-
-aside + div > div > div > div > div > button:hover {
-  background: #f5f5f5;
-  color: #e55;
-}
-
-aside + div > div > div > div > div > select {
-  font-size: 12px;
-  padding: 4px 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+ 
+/* cada tarjeta individual */
+aside ~ div > div > div {
   background: #fff;
-  color: #444;
-  cursor: pointer;
+  border-radius: 6px;
+  padding: 10px 12px;
+  box-shadow: 0 3px 8px rgba(43,33,24,0.18);
+}
+ 
+aside ~ div > div > div > p {
+  font-size: 14px;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+ 
+aside ~ div > div > div > select {
   width: 100%;
+  font-size: 11px;
+  padding: 5px 8px;
+  margin-top: 6px;
+  border: 1px solid #e5ddc9;
+  border-radius: 5px;
+  background: #fdfaf3;
+  color: #2b2118;
+  cursor: pointer;
 }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+ 
+aside ~ div > div > div > button {
+  float: right;
+  border: none;
+  background: transparent;
+  color: #8a7a68;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
 }
-
-body {
-    background-color: white;
+ 
+aside ~ div > div > div > button:hover {
+  color: #c24b3f;
+  background: #fbeae7;
+}
+ 
+/* limpia los floats para que el footer no
+   quede metido debajo de las columnas */
+footer {
+  clear: both;
+  display: block;
+  text-align: center;
+  padding: 16px;
+  color: #cbb9a2;
+  font-size: 12px;
+  background: #2f2319;
+}
+ 
+/* ─────────────────────────────────────────
+   Responsive
+───────────────────────────────────────── */
+@media (max-width: 720px) {
+  aside,
+  aside ~ div {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+  }
 }

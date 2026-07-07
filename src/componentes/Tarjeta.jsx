@@ -1,7 +1,7 @@
-export default function Tarjeta({ descripcion, eliminar, estado, cambiarEstado }) {
+export default function Tarjeta({ nombre, eliminar, estado, cambiarEstado }) {
     return (
         <div>
-            <p>{descripcion}</p>
+            <p>{nombre}</p>
             <button onClick={eliminar}>X</button>
             <select value={estado} onChange={e => cambiarEstado(e.target.value)}>
                 <option value="Pendiente">Pendiente</option>

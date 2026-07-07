@@ -1,5 +1,6 @@
 import Tarjeta from "./Tarjeta"
 
+
 export default function Listado({ tareas, Listadoid, eliminar, cambiarEstado }) {
     let titulo = ""
     switch (Listadoid) {
@@ -14,11 +15,10 @@ export default function Listado({ tareas, Listadoid, eliminar, cambiarEstado }) 
             <div>
                 {tareas
                     .filter((tarea) => tarea.categoria == Listadoid)
-                    .toSorted((a, b) => a.prioridad - b.prioridad)
                     .map((tarjeta) => (
                         <Tarjeta
                             key={tarjeta.id}
-                            descripcion={tarjeta.descripcion}
+                            nombre={tarjeta.nombre}
                             estado={tarjeta.estado}
                             eliminar={() => eliminar(tarjeta.id)}
                             cambiarEstado={(nuevoEstado) => cambiarEstado(tarjeta.id, nuevoEstado)}
