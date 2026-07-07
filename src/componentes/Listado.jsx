@@ -18,7 +18,7 @@ export default function Listado({ tareas, Listadoid, eliminar, cambiarEstado }) 
                     .map((tarjeta) => (
                         <Tarjeta
                             key={tarjeta.id}
-                            descripcion={tarjeta.descripcion}
+                            nombre={tarjeta.nombre}
                             estado={tarjeta.estado}
                             eliminar={() => eliminar(tarjeta.id)}
                             cambiarEstado={(nuevoEstado) => cambiarEstado(tarjeta.id, nuevoEstado)}

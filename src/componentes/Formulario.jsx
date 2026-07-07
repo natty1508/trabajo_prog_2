@@ -18,8 +18,7 @@ export default function Formulario({ guardar }) {
             <input
                 type="text"
                 placeholder="descripcion..."
-                onChange={e => setDatoTarea('descripcion', e.target.value)}
-                value={tarea.descripcion}
+                onChange={e => setDatoTarea('nombre', e.target.value)}
             />
             <select onChange={e => setDatoTarea('prioridad', parseInt(e.target.value))} value={tarea.prioridad}>
                 <option value="0">Alta</option>
